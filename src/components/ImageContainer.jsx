@@ -13,7 +13,7 @@ const ImageContainer = ({ images }) => {
   useEffect(() => {
     setTimeout(() => {
       setSkeleton(false);
-    }, 1000);
+    }, 3000);
   }, []);
   return (
     <section className="pt-5">

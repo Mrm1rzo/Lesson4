@@ -7,3 +7,4 @@ export { default as ImageCard } from "./ImageCard";
 export { default as Loading } from "./Loading";
 export { default as Error } from "./Errorr";
 export { default as GoHome } from "./GoHome";
+export { default as ProtectedRoutes } from "./ProtectedRoutes";

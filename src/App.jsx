@@ -1,6 +1,10 @@
 import React from "react";
-import { Footer, Navbar } from "./components";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ProtectedRoutes } from "./components";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { MainLayout } from "./layouts";
 import {
   About,
@@ -9,15 +13,22 @@ import {
   Home,
   ImageInfo,
   LikedImages,
+  Login,
+  Register,
   User,
 } from "./pages";
 import { action as HomeAction } from "./pages/Home";
 
 const App = () => {
+  const user = true;
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: (
+        <ProtectedRoutes user={user}>
+          <MainLayout />
+        </ProtectedRoutes>
+      ),
       children: [
         { index: true, element: <Home />, action: HomeAction },
         { path: "/about", element: <About /> },
@@ -28,6 +39,8 @@ const App = () => {
         { path: "/downloadedImages", element: <DownloadedImages /> },
       ],
     },
+    { path: "/login", element: user ? <Navigate to="/" /> : <Login /> },
+    { path: "/register", element: user ? <Navigate to="/" /> : <Register /> },
   ]);
   return <RouterProvider router={routes} />;
 };

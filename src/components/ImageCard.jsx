@@ -67,13 +67,11 @@ const ImageCard = ({ image, liked, downloaded }) => {
             target="_blank"
             rel="nofollow"
             download
+            onClick={() => addDownloadedImages(image)}
             href={links.download + "&force=true"}
             className="btn btn-ghost invisible hidden text-xl opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100 sm:flex"
           >
-            <FaDownload
-              onClick={() => addDownloadedImages(image)}
-              className="text-white"
-            />
+            <FaDownload className="text-white" />
           </a>
         )}
       </span>
@@ -106,7 +104,7 @@ const ImageCard = ({ image, liked, downloaded }) => {
             {liked && (
               <button
                 onClick={() => addLikedImage(image)}
-                className="btn btn-primary text-xl"
+                className="btn btn-primary btn-sm"
               >
                 <FaHeartCircleMinus className="text-white" />
               </button>
@@ -114,7 +112,7 @@ const ImageCard = ({ image, liked, downloaded }) => {
             {!liked && (
               <button
                 onClick={() => addLikedImage(image)}
-                className="btn btn-primary text-xl"
+                className="btn btn-primary btn-sm"
               >
                 <FaHeartCirclePlus className="text-white" />
               </button>
@@ -122,7 +120,7 @@ const ImageCard = ({ image, liked, downloaded }) => {
             {downloaded && (
               <button
                 onClick={() => addDownloadedImages(image)}
-                className="btn btn-primary text-xl"
+                className="btn btn-primary btn-sm"
               >
                 <FaTrash className="text-white" />
               </button>
@@ -133,7 +131,7 @@ const ImageCard = ({ image, liked, downloaded }) => {
                 rel="nofollow"
                 download
                 href={links.download + "&force=true"}
-                className="btn btn-primary text-xl"
+                className="btn btn-primary btn-sm"
               >
                 <FaDownload
                   onClick={() => addDownloadedImages(image)}
@@ -145,7 +143,7 @@ const ImageCard = ({ image, liked, downloaded }) => {
         </div>
         <NavLink
           to={`/imageInfo/${image.id}`}
-          className="btn bg-base-100 text-xl"
+          className="btn btn-sm bg-base-100"
         >
           More info
         </NavLink>
