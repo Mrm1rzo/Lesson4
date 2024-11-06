@@ -17,6 +17,7 @@ import Errorr from "../components/Errorr";
 import { FaLocationDot } from "react-icons/fa6";
 import { TbWorldWww } from "react-icons/tb";
 import { useGlobalContex } from "../hook/useGlobalContext";
+import { toast } from "react-toastify";
 
 const ImageInfoSkeleton = () => {
   return (
@@ -42,11 +43,12 @@ const ImageInfo = () => {
   const textToCopy = data?.urls.regular;
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(textToCopy); // Matnni clipboardga yozish
-      setCopied(true); // Nusxa olindi holatiga o'zgartirish
-      setTimeout(() => setCopied(false), 2000); // 2 sekunddan keyin "Nusxa olindi" statusini olib tashlash
+      await navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+      toast.success("Copied successfully ;)");
     } catch (err) {
-      console.error("Nusxa olishda xatolik yuz berdi:", err);
+      toast.error("Failed to copy :(");
     }
   };
 
@@ -85,14 +87,13 @@ const ImageInfo = () => {
         <ImageInfoSkeleton />
       ) : (
         <div className="flex md:gap-5">
-          <figure>
-            <img
-              src={data?.urls.regular}
-              alt="Shoes"
-              className="hidden w-full rounded-3xl shadow-xl md:flex"
-            />
-          </figure>
-          <div className="flex flex-col gap-5">
+          <img
+            src={data?.urls.regular}
+            alt="Shoes"
+            className="hidden w-full rounded-3xl shadow-xl md:flex"
+          />
+
+          <div className="flex w-full flex-col gap-5">
             <div className="card w-full bg-base-300 shadow-xl">
               <figure>
                 <img

@@ -4,15 +4,18 @@ import { FaHeart, FaDownload, FaSun, FaMoon } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useGlobalContex } from "../hook/useGlobalContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebaseConfig";
+import { toast } from "react-toastify";
 
 const themeFromLocalStroge = () => {
   return localStorage.getItem("theme") || "light";
 };
 
 const Navbar = () => {
-  const { likedImages, downloadedImages } = useGlobalContex();
- 
-  
+  const { likedImages, downloadedImages, user, dispatch } = useGlobalContex();
+  console.log(user);
+
   const [theme, setTheme] = useState(themeFromLocalStroge());
   const toggleTheme = () => {
     const newTheme = theme == "light" ? "dark" : "light";
@@ -24,6 +27,16 @@ const Navbar = () => {
     localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  const signOutUser = async () => {
+    try {
+      await signOut(auth);
+      toast.success("See you soon");
+      dispatch({ type: "LOGOUT" });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <section className="bg-base-300">
       <div className="align-element navbar">
@@ -38,7 +51,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu dropdown-content menu-sm  mt-3 w-52 rounded-box bg-base-300 p-2 shadow z-50"
+              className="menu dropdown-content menu-sm z-50 mt-3 w-52 rounded-box bg-base-300 p-2 shadow"
             >
               <li>
                 <NavLink to="/">Homepage</NavLink>
@@ -122,7 +135,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={user?.photoURL}
                   />
                 </div>
               </div>
@@ -137,7 +150,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button onClick={signOutUser}>Logout</button>
                 </li>
               </ul>
             </div>

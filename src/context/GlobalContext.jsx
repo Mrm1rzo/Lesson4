@@ -16,6 +16,12 @@ const changeState = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case "AUTH_READY":
+      return { ...state, auth_ready: true };
+    case "LOGIN":
+      return { ...state, user: payload };
+    case "LOGOUT":
+      return { ...state, user: null };
     case "LIKE":
       return { ...state, likedImages: [...state.likedImages, payload] };
     case "UNLIKE":
@@ -43,6 +49,8 @@ const changeState = (state, action) => {
 
 export function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(changeState, {
+    user: null,
+    auth_ready: false,
     likedImages: [],
     downloadedImages: [],
   });

@@ -14,12 +14,12 @@ body,
   @apply h-full;
 }
 
-#root{
-  @apply flex flex-col
+#root {
+  @apply flex flex-col;
 }
 
-main{
-  @apply grow
+main {
+  @apply grow;
 }
 /* HTML: <div class="loader"></div> */
 /* HTML: <div class="loader"></div> */
@@ -72,4 +72,13 @@ main{
       0 calc(var(--s, 0) * -100%),
       calc(var(--s, 0) * 100% + 100%) 50%;
   }
+}
+
+.background {
+  background: rgba(19, 241, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
 }

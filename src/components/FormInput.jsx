@@ -1,4 +1,5 @@
-import { FaSearch } from "react-icons/fa";
+import { FaKey, FaSearch, FaUser } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const FormInput = ({ type, name, placeholder }) => {
   return (
@@ -9,7 +10,10 @@ const FormInput = ({ type, name, placeholder }) => {
         className="grow"
         placeholder={placeholder}
       />
-      <FaSearch className="text-sm md:text-xl" />
+      {name === "search" && <FaSearch className="text-sm md:text-xl" />}
+      {type === "password" && <FaKey className="text-sm md:text-xl" />}
+      {type === "email" && <MdEmail className="text-sm md:text-xl" />}
+      {name === "name" && <FaUser className="text-sm md:text-xl" />}
     </label>
   );
 };
